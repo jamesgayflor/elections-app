@@ -9,7 +9,7 @@ server.use('/public', express.static(__dirname + '/public/'));
 // Set EJS as the templating engine
 server.set('view engine', 'ejs');
 // parse application/x-www-form-urlencoded
-server.use(bodyParser.urlencoded({ extended: false }))
+server.use(bodyParser.urlencoded({ extended: true }))
 
 // Starting a new database
 const election_db = new sqlite3.Database('./election.db');
@@ -19,10 +19,17 @@ const election_db = new sqlite3.Database('./election.db');
 function initializeDatabase() {
     election_db.serialize(() => {
         const tables = [
+            `CREATE TABLE IF NOT EXISTS roles (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                role TEXT NOT NULL,
+                admin TEXT NOT NULL,
+                canditate TEXT NOT NULL,
+                voter TEXT NOT NULL
+            )`,
             `CREATE TABLE IF NOT EXISTS votes (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 candidate_id TEXT NOT NULL,
-                vote INTEGER
+                votes INTEGER
             )`,
             `CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,8 +38,7 @@ function initializeDatabase() {
                 lastname TEXT NOT NULL,
                 DOB DATE NOT NULL,
                 role_id TEXT NOT NULL,
-                photo TEXT NOT NULL,
-                party_id TEXT NOT NULL
+                photo BLOB NOT NULL
             )`,
             `CREATE TABLE IF NOT EXISTS parties (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -50,16 +56,13 @@ function initializeDatabase() {
                 lastname TEXT NOT NULL,
                 position_id TEXT NOT NULL,
                 party_id TEXT NOT NULL,
-                photo BLOB NOT NULL,
-                votes_id TEXT NOT NULL,
-                candidate_id TEXT NOT NULL,
-                vote INTEGER
+                photo BLOB NOT NULL
             )`,
             `CREATE TABLE IF NOT EXISTS auth (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 user_id INTEGER NOT NULL,
-                auth_token TEXT NOT NULL,
-                FOREIGN KEY(user_id) REFERENCES users(id)
+                username TEXT NOT NULL,
+                password TEXT NOT NULL
             )`
         ];
 
@@ -86,6 +89,8 @@ server.get('/registration', (req, res) => {
 })
 
 server.post('/registration', (req, res) => {
+    let registration_information = req.body;
+    console.log(registration_information);
     res.render(__dirname + '/views/' + 'login');
 })
 
