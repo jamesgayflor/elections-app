@@ -3,6 +3,7 @@ const server = express();
 const port = 5000;
 const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
+const multer = require('multer');
 
 // Static files
 server.use('/public', express.static(__dirname + '/public/'));
@@ -89,9 +90,8 @@ server.get('/registration', (req, res) => {
 })
 
 server.post('/registration', (req, res) => {
-    let registration_information = req.body;
-    console.log(registration_information);
-    res.render(__dirname + '/views/' + 'login');
+    console.log(req.body);
+    // res.render(__dirname + '/views/' + 'login');
 })
 
 server.listen(port, () => {
