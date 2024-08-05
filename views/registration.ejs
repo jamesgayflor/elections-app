@@ -46,6 +46,17 @@
                     <input type="password" id="password" name="password" required>
                 </div>
             </div>
+            <div class="form-section">
+                <div class="input-group">
+                    <label for="role">Role</label>
+                    <select id="role" name="role" required>
+                        <option value="">Select Role</option>
+                        <option value="admin"><%= registration_roles[0].role %></option>
+                        <option value="voter"><%= registration_roles[1].role %></option>
+                        <option value="candidate"><%= registration_roles[2].role %></option>
+                    </select>
+                </div>
+            </div>
             <button type="submit">Sign Up</button>
         </form>
     </div>
