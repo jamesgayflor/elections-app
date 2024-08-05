@@ -4,6 +4,7 @@ const port = 5000;
 const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
 const multer = require('multer');
+const path = path
 
 // Static files
 server.use('/public', express.static(__dirname + '/public/'));
@@ -14,6 +15,9 @@ server.use(bodyParser.urlencoded({ extended: true }))
 
 // Starting a new database
 const election_db = new sqlite3.Database('./election.db');
+// Setup storage for storing files
+const storage = multer.memoryStorage();
+const upload = multer({storage: storage});
 
 // Database section
 // Initialize Database Tables
@@ -23,9 +27,6 @@ function initializeDatabase() {
             `CREATE TABLE IF NOT EXISTS roles (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 role TEXT NOT NULL,
-                admin TEXT NOT NULL,
-                canditate TEXT NOT NULL,
-                voter TEXT NOT NULL
             )`,
             `CREATE TABLE IF NOT EXISTS votes (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -94,6 +95,7 @@ server.post('/registration', (req, res) => {
     // res.render(__dirname + '/views/' + 'login');
 })
 
+// ----------------------------------------------------
 server.listen(port, () => {
     console.log(`Server is on at port ${port}.`);
 })
