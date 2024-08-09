@@ -39,7 +39,8 @@ function initializeDatabase() {
                 middlename TEXT,
                 lastname TEXT NOT NULL,
                 DOB DATE NOT NULL,
-                photo BLOB NOT NULL
+                photo BLOB NOT NULL,
+                user_id INTEGER NOT NULL
             )`,
             `CREATE TABLE IF NOT EXISTS parties (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -80,6 +81,7 @@ function initializeDatabase() {
 // Initialize database
 initializeDatabase();
 
+
 // Server Runtime Section
 server.get('/', (req, res) => {
 
@@ -94,8 +96,31 @@ server.get('/', (req, res) => {
 })
 
 server.get('/registration', (req, res) => {
-    res.render('registration');
+    // Pulling Roles Information from database
+    election_db.all(`SELECT * FROM roles`, [], (err, row) => {
+        if (err) {
+            throw err;
+        }
+        const registration_roles = row;
+        res.render('registration', { registration_roles });
+    });
 })
+
+// Dashboard Section
+server.get('/dashboard', (req, res) => {
+
+    // Pulling Roles Information from database
+    election_db.all(`SELECT COUNT(*) FROM users WHERE user_id = 2`, [], (err, row) => {
+        if (err) {
+            throw err;
+        }
+        const voters_count = row[0]["COUNT(*)"];
+        res.render("dashboard", {voters_count});
+    });
+
+})
+
+// Post Method Sectioon
 
 server.post('/registration', upload.fields([{ name: 'photo', maxCount: 1 }]), (req, res) => {
 
@@ -109,7 +134,7 @@ server.post('/registration', upload.fields([{ name: 'photo', maxCount: 1 }]), (r
         const file = files.photo[0];
 
         // Prepare SQL insert statement
-        const insert_stmt = election_db.prepare(`INSERT INTO users(firstname, middlename, lastname, DOB, photo) VALUES(?, ?, ?, ?, ?)`);
+        const insert_stmt = election_db.prepare(`INSERT INTO users(firstname, middlename, lastname, DOB, photo, user_id) VALUES(?, ?, ?, ?, ?, ?)`);
 
         const get_userid_stmt = election_db.prepare(`INSERT INTO auth(user_id, username, password) VALUES(?, ?, ?)`);
 
@@ -136,11 +161,11 @@ server.post('/registration', upload.fields([{ name: 'photo', maxCount: 1 }]), (r
             user_role: user_role_id
         }
 
-        console.log(user_role_selection);
-        console.log(user_role_id);
+        // console.log(user_role_selection);
+        // console.log(user_role_id);
 
         // Execute SQL insert statement
-        insert_stmt.run(strings_data.firstname, strings_data.middlename, strings_data.lastname, strings_data.dob, file.buffer, function (err) {
+        insert_stmt.run(strings_data.firstname, strings_data.middlename, strings_data.lastname, strings_data.dob, file.buffer, strings_data.user_role, function (err) {
             if (err) {
                 console.log(err.message)
             }

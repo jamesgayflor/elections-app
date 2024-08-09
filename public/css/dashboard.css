@@ -1,0 +1,80 @@
+header {
+    height: 50px;
+
+}
+
+#app-logo {
+    width: 50px;
+    height: 50px;
+}
+
+.header-icons{
+    font-size: 20px;
+}
+
+main {
+    background-color: hsl(0, 0%, 96%);
+    padding-right: 0 !important;
+}
+
+aside {
+    width: 80%;
+    padding-top: 15px;
+    text-align: center;
+    margin: auto;
+    margin-top: 0;
+}
+
+.summary-result {
+    height: 150px;
+    text-align: left;
+    align-items: center;
+    align-content: center;
+}
+
+.summary-result>i {
+    font-size: 30px;
+    display: none;
+}
+
+.counts {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#chairman {
+    text-align: left !important;
+    width: 150px;
+    margin-left: 25px;
+    margin-top: 20px;
+}
+
+.aside-second-section {
+margin-top: 20px;
+}
+
+.chairman-boxes {
+    height: 50px;
+}
+
+@media (min-width: 576px) {
+
+ }
+
+ /* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+.summary-result>i {
+    display: block;
+}
+.counts {
+    font-size: 40px;
+    font-weight: bold;
+}
+#chairman {
+    text-align: left !important;
+    outline: solid green;
+    width: 150px;
+    margin-left: 0;
+    margin-top: 20px;
+}
+}
