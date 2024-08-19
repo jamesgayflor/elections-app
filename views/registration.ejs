@@ -4,61 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Election Registration</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/public/bootstrap5/css/bootstrap.min.css">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/public/css/main.css">
 </head>
-<body>
-    <div class="signup-container">
-        <form action="/registration" method="post" class="signup-form" enctype="multipart/form-data">
-            <h2>Registration Form</h2>
-            <div class="form-section">
-                <div class="input-group">
-                    <label for="firstname">First Name</label>
-                    <input type="text" id="firstname" name="firstname" required>
-                </div>
-                <div class="input-group">
-                    <label for="middlename">Middle Name</label>
-                    <input type="text" id="middlename" name="middlename" required>
-                </div>
-            </div>
-            <div class="form-section">
-                <div class="input-group">
-                    <label for="lastname">Last Name</label>
-                    <input type="text" id="lastname" name="lastname" required>
-                </div>
-                <div class="input-group">
-                    <label for="dob">Date of Birth</label>
-                    <input type="date" id="dob" name="dob" required>
-                </div>
-            </div>
-            <div class="form-section">
-                <div class="input-group">
-                    <label for="photo">Photo</label>
-                    <input type="file" id="photo" name="photo" accept="image/*" required>
-                </div>
-            </div>
-            <div class="form-section">
-                <div class="input-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-            </div>
-            <div class="form-section">
-                <div class="input-group">
-                    <label for="role">Role</label>
-                    <select id="role" name="role" required>
-                        <option value="">Select Role</option>
-                        <option value="admin"><%= registration_roles[0].role %></option>
-                        <option value="voter"><%= registration_roles[1].role %></option>
-                        <option value="candidate"><%= registration_roles[2].role %></option>
-                    </select>
-                </div>
-            </div>
-            <button type="submit">Sign Up</button>
-        </form>
-    </div>
+<body class="bg-dark text-light">
+    <main>
+        <section class="reg-boxes align-text-center">
+            <h1>Hello</h1>
+        </section>
+        
+        <section class="reg-boxes"></section>
+    </main>
 </body>
 </html>

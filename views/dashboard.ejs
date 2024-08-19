@@ -1,162 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Election Admin Dashboard</title>
-    <!-- Local CSS -->
-    <link rel="stylesheet" href="/public/css/dashboard.css">
-    <!-- Local CSS -->
-    <link rel="stylesheet" href="/public/bootstrap5/css/bootstrap.min.css">
-    <script src="/public/bootstrap5/js/bootstrap.bundle.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://kit.fontawesome.com/9183ef123e.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
-    <header class="navbar bg bg-dark">
-        <div class="container-fluid">
-            <a href="#">
-                <img src="/public/images/election.png" alt="election logo" id="app-logo">
-            </a>
-            <div class="d-flex">
-                <i class="fa-solid fa-bell header-icons" style="color: #ffffff;"></i>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa-solid fa-user text-white header-icons"></i>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </div>
-        </div>
-    </header>
-    <main class="container-fluid d-flex">
-        <div class="row col-auto">
-            <div class="col-auto min-vh-100 bg-dark pt-4">
-                <!-- <div class="pt-2 pb-1 px-2">
-                    <a href="#" class="text-decoration-none text-white">
-                        <i class="fa-brands fa-nfc-directional"></i>
-                        <span class="fs-4 d-none d-sm-inline">Sidebar</span>
-                    </a>
-                </div> -->
-                <!-- <hr class="text-white"> -->
-                <ul class="nav nav-pills flex-column mb-auto">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link active text-white">
-                            <i class="fa-solid fa-chart-line"></i>
-                            <span class="d-none d-sm-inline">Dashboard</span>
-                        </a>
-                    </li>
-                    <!-- ----------- -->
-                    <li class="nav-item pt-2">
-                        <a href="#" class="nav-link text-white">
-                            <i class="fa-solid fa-person-booth"></i>
-                            <span class="d-none d-sm-inline">Voters</span>
-                        </a>
-                    </li>
-                    <!-- ----------- -->
-                    <li class="nav-item pt-2">
-                        <a href="#" class="nav-link text-white">
-                            <i class="fa-solid fa-ribbon"></i>
-                            <span class="d-none d-sm-inline">Parties</span>
-                        </a>
-                    </li>
-                    <!-- ----------- -->
-                    <li class="nav-item pt-2">
-                        <a href="#" class="nav-link text-white">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <span class="d-none d-sm-inline">Positions</span>
-                        </a>
-                    </li>
-                    <!-- ----------- -->
-                    <li class="nav-item pt-2">
-                        <a href="#" class="nav-link text-white">
-                            <i class="fa-solid fa-people-arrows"></i>
-                            <span class="d-none d-sm-inline">Contestants</span>
-                        </a>
-                    </li>
-                    <!-- ----------- -->
-                    <li class="nav-item pt-2">
-                        <a href="#" class="nav-link text-white">
-                            <i class="fa-solid fa-users"></i>
-                            <span class="d-none d-sm-inline">Users</span>
-                        </a>
-                    </li>
-                    <!-- ----------- -->
-                </ul>
-            </div>
-        </div>
-        <aside class="">
-            <h2>Result Dashboard</h2>
-            <section id="aside-first-section" class="container mt-4">
-                <div class="row gap-2">
-                    <div
-                        class="col-sm col-md col-md bg-dark summary-result shadow bg-white d-flex justify-content-evenly">
-                        <i class="fa-solid fa-pencil"></i>
-                        <div class="result-description">
-                            <h5>Registered Voters</h5>
-                            <p>Total number of registerd voters.</p>
-                        </div>
-                        <p id="voters-count" class="counts"><%= voters_count %></p>
+<%- include("partial/header") %>
+    <aside class="">
+        <h2>Result Dashboard</h2>
+        <section id="aside-first-section" class="container mt-4">
+            <div class="row gap-2">
+                <div class="col-sm col-md col-md bg-dark summary-result shadow bg-white d-flex justify-content-evenly">
+                    <i class="fa-solid fa-pencil"></i>
+                    <div class="result-description">
+                        <h5>Registered Voters</h5>
+                        <p>Total number of registerd voters.</p>
                     </div>
-                    <div
-                        class="col-sm col-md col-md bg-dark summary-result shadow bg-white d-flex justify-content-evenly">
-                        <i class="fa-solid fa-scale-balanced" style="color: #FFD43B;"></i>
-                        <div class="result-description">
-                            <h5>Total Votes</h5>
-                            <p>Total number of votes.</p>
-                        </div>
-                        <p id="votes-count" class="counts">0</p>
-                    </div>
+                    <p id="voters-count" class="counts">
+                        <%= voters_count %>
+                    </p>
                 </div>
-            </section>
+                <div class="col-sm col-md col-md bg-dark summary-result shadow bg-white d-flex justify-content-evenly">
+                    <i class="fa-solid fa-scale-balanced" style="color: #FFD43B;"></i>
+                    <div class="result-description">
+                        <h5>Total Votes</h5>
+                        <p>Total number of votes.</p>
+                    </div>
+                    <p id="votes-count" class="counts">0</p>
+                </div>
+            </div>
+        </section>
+        <section class="aside-second-section container">
             <h2 id="chairman">Chairman</h2>
-            <section class="aside-second-section container">
-                <div class="row row-cols-auto gap-4">
-                    <div class=" col chairman-boxes card bg-white shadow" style="width: 16rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
-                    <div class=" col chairman-boxes card bg-white shadow" style="width: 16rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
-                    <div class=" col chairman-boxes card bg-white shadow" style="width: 16rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
-                    <div class=" col chairman-boxes card bg-white shadow" style="width: 16rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
+            <div class="row row-cols-auto gap-2">
+                <div class=" col chairman-boxes card bg-white shadow" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                            of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
                     </div>
                 </div>
-            </section>
-        </aside>
-    </main>
-</body>
-
-</html>
+                <div class=" col chairman-boxes card bg-white shadow" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                            of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+                <div class=" col chairman-boxes card bg-white shadow" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                            of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+                <div class=" col chairman-boxes card bg-white shadow" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                            of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </aside>
+    <%- include("partial/footer") %>

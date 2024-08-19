@@ -1,0 +1,41 @@
+<%- include("partial/header") %>
+        <aside class="">
+            <ul class="nav nav-underline">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Voters</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </li>
+              </ul>
+              <hr>
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Vote</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% voters_list.forEach(voter=> { %>
+                  <tr>
+                    <td><img src="<%= URL.createObjectURL(voter.photo) %>" alt=""></td>
+                    <td><%= voter.firstname %> <%= voter.middlename %> <%= voter.lastname %></td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+        </aside>
+        <%- include("partial/footer") %>

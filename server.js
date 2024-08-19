@@ -85,15 +85,36 @@ initializeDatabase();
 // Server Runtime Section
 server.get('/', (req, res) => {
 
+    let registration_roles = [];
+    let registration_parties = [];
+    let registration_positions = [];
+
     // Pulling Roles Information from database
     election_db.all(`SELECT * FROM roles`, [], (err, row) => {
         if (err) {
             throw err;
         }
-        const registration_roles = row;
-        res.render('registration', { registration_roles });
+        registration_roles = row;
+
+        // Next
+        election_db.all(`SELECT * FROM parties`, [], (err, row) => {
+            if (err) {
+                throw err;
+            }
+            registration_parties = row;
+
+            // Next
+            election_db.all(`SELECT * FROM positions`, [], (err, row) => {
+                if (err) {
+                    throw err;
+                }
+                registration_positions = row;
+
+                res.render('registration', { registration_roles, registration_parties, registration_positions });
+            });
+        });
     });
-})
+});
 
 server.get('/registration', (req, res) => {
     // Pulling Roles Information from database
@@ -115,9 +136,21 @@ server.get('/dashboard', (req, res) => {
             throw err;
         }
         const voters_count = row[0]["COUNT(*)"];
-        res.render("dashboard", {voters_count});
+        res.render("dashboard", { voters_count });
     });
 
+})
+
+// Voters Dashboard Section
+server.get("/voters", (req, res) => {
+    election_db.all(`SELECT firstname, middlename, lastname, photo FROM users WHERE user_id = 2`, [], (err, row) => {
+        if (err) {
+            throw err;
+        }
+        const voters_list = row;
+        console.log(voters_list);
+        res.render("voters", {voters_list});
+    });
 })
 
 // Post Method Sectioon
