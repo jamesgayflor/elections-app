@@ -21,6 +21,10 @@ main {
     padding-right: 0 !important;
 }
 
+hr {
+    height: 3px !important;
+}
+
 aside {
     width: 80%;
     padding-top: 15px;

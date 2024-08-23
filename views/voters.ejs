@@ -4,7 +4,7 @@
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="#">Voters</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link" href="#">Link</a>
                 </li>
                 <li class="nav-item">
@@ -13,7 +13,7 @@
                 <li class="nav-item">
                   <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li>
-              </ul>
+              </ul> -->
               <hr>
               <table class="table table-hover">
                 <thead>
@@ -21,7 +21,6 @@
                     <th scope="col">Image</th>
                     <th scope="col">Name</th>
                     <th scope="col">Position</th>
-                    <th scope="col">Vote</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -30,8 +29,7 @@
                   <tr>
                     <td><img src="" alt=""></td>
                     <td><%= voter.firstname %> <%= voter.middlename %> <%= voter.lastname %></td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
+                    <td>Voter</td>
                     <td><button type="button" class="btn btn-primary">Vote</button></td>
                   </tr>
                   <% }); %>
