@@ -28,11 +28,11 @@
                 <tbody>
                     <% voters_list.forEach(voter=> { %>
                   <tr>
-                    <td><img src="<%= URL.createObjectURL(voter.photo) %>" alt=""></td>
+                    <td><img src="" alt=""></td>
                     <td><%= voter.firstname %> <%= voter.middlename %> <%= voter.lastname %></td>
                     <td>@mdo</td>
                     <td>@mdo</td>
-                    <td>@mdo</td>
+                    <td><button type="button" class="btn btn-primary">Vote</button></td>
                   </tr>
                   <% }); %>
                 </tbody>
