@@ -148,9 +148,14 @@ server.get("/voters", (req, res) => {
             throw err;
         }
         const voters_list = row;
-        console.log(voters_list);
+        // console.log(voters_list);
         res.render("voters", {voters_list});
     });
+})
+
+// Canditate vote section
+server.get("/vote_canditate", (req, res) => {
+    res.render("vote_canditate");
 })
 
 // Post Method Sectioon

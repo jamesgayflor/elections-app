@@ -1,11 +1,8 @@
-const all_tabs = document.querySelectorAll(".");
+vote_btns = document.querySelectorAll(".vote_bn");
+console.log(vote_btns);
 
-function activeTabs() {
-    all_tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            tab.classList.add("active");
-        })
-    });
-}
-
-activeTabs();
+vote_btns.forEach(element => {
+    element.addEventListener('click', () => {
+        
+    })
+});
