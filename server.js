@@ -136,14 +136,23 @@ server.get('/dashboard', (req, res) => {
             throw err;
         }
         const voters_count = row[0]["COUNT(*)"];
-        res.render("dashboard", { voters_count });
+        // == The below blow sql statement id to retrieve candidates data from the candidates table
+        election_db.all(`SELECT firstname, middlename, lastname FROM candidates`, [], (err, row) => {
+            if (err) {
+                throw err;
+            }
+            const candidates_list = row;
+            // console.log(candidates_list);
+            res.render("dashboard", { voters_count, candidates_list });
+        })
+        // ------------------------
     });
 
 })
 
 // Voters Dashboard Section
 server.get("/voters", (req, res) => {
-    election_db.all(`SELECT firstname, middlename, lastname, photo FROM users WHERE user_id = 2`, [], (err, row) => {
+    election_db.all(`SELECT id, firstname, middlename, lastname, photo, voted FROM users WHERE user_id = 2`, [], (err, row) => {
         if (err) {
             throw err;
         }
@@ -154,11 +163,38 @@ server.get("/voters", (req, res) => {
 })
 
 // Canditate vote section
-server.get("/vote_canditate", (req, res) => {
-    res.render("vote_canditate");
+server.get("/vote_candidate", (req, res) => {
+    // console.log(req.query);
+    election_db.all(`SELECT id, firstname, middlename, lastname, photo FROM candidates`, [], (err, row) => {
+        if (err) {
+            throw err;
+        }
+        const candidates_list = row;
+        res.render("vote_candidate", {candidates_list, voter_id: req.query.voter_id});
+    });
 })
 
 // Post Method Sectioon
+
+// vote_candidate post 
+server.post("/vote_candidate", (req, res) => {
+    election_db.run(`UPDATE users SET voted = ? WHERE id = ? `, 
+        ["TRUE", req.body.voter_id], (err, row) => {
+            if (err) {
+                throw err;
+            }
+            election_db.run(`INSERT INTO votes (candidate_id, votes, user_id) VALUES (?, ?, ?)`,
+                [req.body.candidate_id, 1, req.body.voter_id], (err, row) => {
+                    if (err) {
+                        throw err
+                    }
+                    res.redirect("/voters");
+                }
+            )
+        })
+    // console.log(req.body);
+})
+// --------------------------
 
 server.post('/registration', upload.fields([{ name: 'photo', maxCount: 1 }]), (req, res) => {
 

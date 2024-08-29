@@ -1,0 +1,30 @@
+<%- include("partial/header") %>
+<aside>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Image</th>
+          <th scope="col">Name</th>
+          <th scope="col">Position</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+          <% candidates_list.forEach(candidate => { %>
+        <tr>
+          <td><img src="" alt="" class="voter-img"></td>
+          <td><%= candidate.firstname %> <%= candidate.middlename %> <%= candidate.lastname %></td>
+          <td>Canditate</td>
+          <td>
+            <form action="/vote_candidate" method="post">
+              <input type="hidden" name="voter_id" value="<%= voter_id %>">
+              <input type="hidden" name="candidate_id" value="<%= candidate.id %>">
+              <input type="submit" value="Vote" class="btn btn-primary">
+            </form>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+</aside>
+<%- include("partial/footer") %>

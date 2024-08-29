@@ -1,20 +1,5 @@
 <%- include("partial/header") %>
-        <aside class="">
-            <ul class="nav nav-underline">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Voters</a>
-                </li>
-                <!-- <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                </li>
-              </ul> -->
-              <hr>
+        <aside>
               <table class="table table-hover">
                 <thead>
                   <tr>
@@ -25,12 +10,26 @@
                   </tr>
                 </thead>
                 <tbody>
-                    <% voters_list.forEach(voter=> { %>
+                    <% voters_list.forEach(voter => { %>
                   <tr>
-                    <td><img src="" alt=""></td>
+                    <td><img src="" alt="" class="voter-img"></td>
                     <td><%= voter.firstname %> <%= voter.middlename %> <%= voter.lastname %></td>
                     <td>Voter</td>
-                    <td><button type="button" class="btn btn-primary vote_bn">Vote</button></td>
+                    <% if (voter.voted == "TRUE") {%>
+                      <td>
+                        <form action="/vote_candidate?<%= voter.id %>" method="get">
+                          <input type="hidden" name="voter_id" value="<%= voter.id %>">
+                          <input type="submit" value="Voted" class="btn btn-success disabled">
+                        </form>
+                      </td>
+                    <% } else { %>
+                      <td>
+                        <form action="/vote_candidate?<%= voter.id %>" method="get">
+                          <input type="hidden" name="voter_id" value="<%= voter.id %>">
+                          <input type="submit" value="Vote" class="btn btn-primary">
+                        </form>
+                      </td>
+                      <% } %>
                   </tr>
                   <% }); %>
                 </tbody>
